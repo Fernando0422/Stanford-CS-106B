@@ -1,0 +1,64 @@
+Before submitting this file, make sure that there are no more TODO
+placeholders remaining in the file (and remove this comment too).
+
+Warmup
+------
+
+Q1. The display of the Stack in the debugger uses the labels `top` and `bottom` to mark the two ends of the stack. How are the contents labeled when the Stack contains only one element?
+A1. When there is only one element, the very element becomes both the top and bottom of the stack therefore
+    when accessing or removing the queue, it will result in an empty stack.
+
+Q2. For which type of inputs does the function go into an infinite loop?
+A2. The input that causes the function to go into an infinite loop are negative integers.
+    The reason for this is because when the function dequeues the element and doubles the negative number
+    and pushes back in the queue, however, because the loop condition is "i < q.size()", the function will enter
+    an infinite loop due to it not reaching the termination condition.
+
+Q3. Show your edited code for `duplicateNegatives` that fixes the problem with the infinite loop.
+A3. void duplicateNegatives(Queue<int>& q) {
+        int qsize = q.size();
+        for (int i = 0; i < qsize; i++) {
+            int val = q.dequeue();
+            if (val < 0) {
+                q.enqueue(val);
+            }
+            q.enqueue(val);
+        }
+
+
+        // original duplicateNegatives function
+        //    for (int i = 0; i < q.size(); i++) {
+        //        int val = q.dequeue();
+        //        q.enqueue(val);
+        //        if (val < 0) {
+        //            q.enqueue(val);   // double up on negative numbers
+        //        }
+        }
+
+
+
+Q4. What is the better fix to `sumStack` that corrects the bug?
+A4. Rather than making the total equal to s.pop(), it is better to initialize it to 0 so that if there
+    is an empty queue, it will not fail.
+
+
+Maze
+----
+Q5. After you have written your test cases, describe your testing strategy to confirm that your `validatePath` operates as intended. How confident are you that it works correctly in all cases?
+A5. The testing strategies that I implemented included testing a valid path, empty path, path starting at a wrong location, path ending at a wrong location
+    out of bounds location, path with wall, and path with loops. By testing these various different casses, I can expect that the function is accurate.
+
+Q6. While BFS and DFS are equivalently capable in terms of finding a solution, the two can differ in which solution is found (when there are multiple) and how quickly a solution is discovered. An advantage of BFS is that it always finds the shortest possible solution, explain why this is guaranteed for BFS and not for DFS. An advantage of DFS is that for some mazes it will find a solution more quickly than BFS, explain how this could be so.
+A6. BFS guarantees the shortest possible solution because it explores the graph layer by layer, ensuring that the goal node is reached by traversing the fewest number of edges or steps from the initial node.
+    DFS, on the other hand, may find a solution more quickly for certain mazes by exploring a single path deeply before backtracking. However, DFS does not guarantee finding the shortest path and only guarantees finding any solution if one exists.
+
+
+
+Q7. Most students are sold on the benefit of the fancy features provided by `Vector`, `Grid`, and `Set` but the ADT skeptics may question the value of `Stack` and `Queue` ADTs, seeing them as nothing more than a restricted `Vector`. Make your best argument to convince them of the benefits these ADTS have over `Vector`.
+A7. The benefits of using Stack and Queue ADTs over Vector include efficiency, clear semantics, space efficiency (for Stack), ordering, synchronization, and code readability.
+
+
+Balanced
+--------
+Q8. Compare your recursive solution to the iterative approach used for the Check Balance problem on the Section 2 handout. Which version do you find easier to read and understand? In which version did you find it easier to confirm the correct behavior?
+    I find the iterative approach a bit easier to understand and implement where as recursive is still a little difficult for me to grasph.
